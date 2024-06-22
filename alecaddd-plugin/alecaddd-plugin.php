@@ -17,9 +17,19 @@ defined( 'ABSPATH' ) or die( 'Why?' );
 
 class AlecadddPlugin
 {
+
+  //constructor
+  function __construct() {
+    add_action( 'init', array( $this, 'custom_post_type' ) );
+  }
+
   //methods
   function activate() {
+    //generate a custom post type: Call the class method
+    $this->custom_post_type();
 
+    //flush rewrite rules: this is a global method
+    flush_rewrite_rules();
   }
 
   function deactivate() {
@@ -27,6 +37,11 @@ class AlecadddPlugin
   }
 
   function uninstall() {
+
+  }
+
+  function custom_post_type() {
+    register_post_type( 'book', ['public' => 'true', 'label' => 'Books'] );
 
   }
 }
